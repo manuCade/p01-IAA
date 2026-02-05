@@ -20,13 +20,16 @@
  * conjunta de variables binarias. La tabla se puede inicializar de dos formas: 
  * generando números aleatorios o leyendo los valores desde un archivo CSV.
  */
-class Tabla {
+class DistribucionConjunta {
  public:
-  Tabla() = default;
-  Tabla(int numero_variables);
-  Tabla(const std::string& nombre_archivo_csv);
+  DistribucionConjunta() = default;
+  DistribucionConjunta(int numero_variables);
+  DistribucionConjunta(const std::string& nombre_archivo_csv);
+  size_t GetNumeroVariables() const { return num_variables_; }
+  void Mostrar() const;
  private:
   std::vector<double> distribucion_conjunta_;
+  int num_variables_{0};
  private:
   size_t ConvertirAIndice(const std::string& input);
 };

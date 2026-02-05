@@ -12,14 +12,15 @@
 
 #include <iostream>
 #include <string>
-#include "tabla.h"
+#include "distribucion_conjunta.h"
+#include "gestor_inferencia.h"
 
 int main() {
   std::cout << "Quiere generar la tabla a partir de un fichero csv? (s/n): ";
   char respuesta{};
   std::cin >> respuesta;
 
-  Tabla tabla;
+  DistribucionConjunta tabla;
   if (respuesta == 's' || respuesta == 'S') {
     std::cout << "Introduzca el nombre del fichero csv: ";
     std::string nombre_csv{};
@@ -30,7 +31,7 @@ int main() {
       return EXIT_FAILURE;
     }
 
-    tabla = Tabla(nombre_csv);
+    tabla = DistribucionConjunta(nombre_csv);
   } else {
     std::cout << "Introduzca el número de variables binarias: ";
     int numero_variables{};
@@ -41,7 +42,36 @@ int main() {
       return EXIT_FAILURE;
     }
     
-    tabla = Tabla(numero_variables);
+    tabla = DistribucionConjunta(numero_variables);
   }
-  return EXIT_SUCCESS;
+  tabla.Mostrar();
+
+  GestorInferencia gestor(tabla);
+  int n_vars = tabla.GetNumeroVariables();
+
+  int cantidad_cond;
+  std::cout << "\nCuántas variables quieres condicionar? ";
+  std::cin >> cantidad_cond;
+
+  for(int i = 0; i < cantidad_cond; ++i) {
+    int indice, valor;
+    std::cout << "Índice variable (1-" << n_vars << "): ";
+    std::cin >> indice;
+    std::cout << "Valor (0 o 1): ";
+    std::cin >> valor;
+    gestor.SeleccionarCondicionada(indice, valor);
+  }
+
+  int cantidad_int;
+  std::cout << "\nCuántas variables de interés? ";
+  std::cin >> cantidad_int;
+
+  for(int i = 0; i < cantidad_int; ++i) {
+    int indice;
+    std::cout << "Índice variable (1-" << n_vars << "): ";
+    std::cin >> indice;
+    gestor.SeleccionarInteres(indice);
+  }
+
+  gestor.MostrarConfiguracion();
 }

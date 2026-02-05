@@ -14,7 +14,8 @@
 #include <random>
 #include <fstream>
 #include <sstream>
-#include "tabla.h"
+#include <iostream>
+#include "distribucion_conjunta.h"
 
 /**
  * @brief Constructor que inicializa la tabla de probabilidades generando 
@@ -22,23 +23,24 @@
  * 
  * @param numero_variables El número de variables binarias
  */
-Tabla::Tabla(int numero_variables) {
-  std::vector<double> tabla{};
-  tabla.resize(std::pow(2, numero_variables));
+DistribucionConjunta::DistribucionConjunta(int numero_variables) {
+  num_variables_ = numero_variables;
+  distribucion_conjunta_.resize(std::pow(2, num_variables_));
 
   // Genera numero aleatorio
-  std::mt19937 generador{};
+  std::random_device rd;
+  std::mt19937 generador(rd());
   std::uniform_int_distribution<> distribucion(0, 1000);
-  int suma_numeros_aleatorios = 0;
+  double suma_numeros_aleatorios = 0.0;
 
-  for (size_t i = 0; i < tabla.size(); ++i) {
+  for (size_t i = 0; i < distribucion_conjunta_.size(); ++i) {
     int numero_aleatorio = distribucion(generador);
-    tabla[i] = numero_aleatorio;
+    distribucion_conjunta_[i] = numero_aleatorio;
     suma_numeros_aleatorios += numero_aleatorio;
   }
 
-  for (size_t i = 0; i < tabla.size(); ++i) {
-    tabla[i] /= double(suma_numeros_aleatorios);
+  for (size_t i = 0; i < distribucion_conjunta_.size(); ++i) {
+    distribucion_conjunta_[i] /= double(suma_numeros_aleatorios);
   }
 }
 
@@ -49,7 +51,7 @@ Tabla::Tabla(int numero_variables) {
  * @param input La cadena de bits representando la combinación de variables
  * @return El índice numérico correspondiente a la combinación de bits
  */
-size_t Tabla::ConvertirAIndice(const std::string& input) {
+size_t DistribucionConjunta::ConvertirAIndice(const std::string& input) {
   size_t indice{0};
   for (size_t i = 0; i < input.length(); ++i) {
     indice += (input[i] == '1') ? std::pow(2, input.length() - 1 - i) : 0;
@@ -63,7 +65,7 @@ size_t Tabla::ConvertirAIndice(const std::string& input) {
  * 
  * @param nombre_archivo_csv El nombre del archivo CSV
  */
-Tabla::Tabla(const std::string& nombre_archivo_csv) {
+DistribucionConjunta::DistribucionConjunta(const std::string& nombre_archivo_csv) {
   std::ifstream archivo_csv(nombre_archivo_csv);
   std::string linea{};
   std::string separador = ",";
@@ -74,7 +76,8 @@ Tabla::Tabla(const std::string& nombre_archivo_csv) {
     std::string valor_str = linea.substr(linea.find(separador) + 1, linea.length());
 
     if (contador_de_linea == 1) {
-      distribucion_conjunta_.resize(std::pow(2, numero_binario.length()));
+      num_variables_ = numero_binario.length();
+      distribucion_conjunta_.resize(std::pow(2, num_variables_));
     }
 
     size_t indice = ConvertirAIndice(numero_binario);
@@ -82,5 +85,14 @@ Tabla::Tabla(const std::string& nombre_archivo_csv) {
 
     distribucion_conjunta_[indice] = valor;
     ++contador_de_linea;
+  }
+}
+
+/**
+ * @brief Método para mostrar la tabla de probabilidades en la consola
+ */
+void DistribucionConjunta::Mostrar() const {
+  for(size_t i = 0; i < distribucion_conjunta_.size(); ++i) {
+    std::cout << "Indice " << i << ": " << distribucion_conjunta_[i] << "\n";
   }
 }
