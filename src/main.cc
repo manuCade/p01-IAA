@@ -57,6 +57,7 @@ int main() {
     int indice, valor;
     std::cout << "Índice variable (1-" << n_vars << "): ";
     std::cin >> indice;
+    gestor.IndicesCondicionada(indice);
     std::cout << "Valor (0 o 1): ";
     std::cin >> valor;
     gestor.SeleccionarCondicionada(indice, valor);

@@ -12,11 +12,13 @@ class GestorInferencia {
  public:
   GestorInferencia(const DistribucionConjunta& tabla);
   void SeleccionarCondicionada(int indice_variable, bool valor);
+  void IndicesCondicionada(int indice_variable);
   void SeleccionarInteres(int indice_variable);
   void MostrarConfiguracion();
 
  private:
   int num_variables_{0};
-  std::vector<int> valores_condicionados_;
+  std::vector<bool> indices_condicionados_;
+  std::vector<bool> valores_condicionados_;
   std::vector<bool> es_interes_;
 };

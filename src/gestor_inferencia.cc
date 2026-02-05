@@ -10,7 +10,8 @@
 GestorInferencia::GestorInferencia(const DistribucionConjunta& tabla) {
   num_variables_ = tabla.GetNumeroVariables();
   // Indicamos con -1 que no hay condicionamiento
-  valores_condicionados_.assign(num_variables_, -1);
+  indices_condicionados_.assign(num_variables_, false);
+  valores_condicionados_.assign(num_variables_, false);
   es_interes_.assign(num_variables_, false);
 }
 
@@ -24,8 +25,18 @@ GestorInferencia::GestorInferencia(const DistribucionConjunta& tabla) {
 void GestorInferencia::SeleccionarCondicionada(int indice_variable, bool valor) {
   int indice_real = indice_variable - 1;
 
-  if (indice_real >= 0 && indice_real < num_variables_) {
+  if (indice_real >= 0 && indice_real < num_variables_ && indices_condicionados_[indice_real] == 1) {
     valores_condicionados_[indice_real] = valor;
+  } else {
+    std::cerr << "Error: Índice o valor incorrecto." << "\n";
+  }
+}
+
+void GestorInferencia::IndicesCondicionada(int indice_variable) {
+  int indice_real = indice_variable - 1;
+
+  if (indice_real >= 0 && indice_real < num_variables_) {
+    indices_condicionados_[indice_real] = true;
   } else {
     std::cerr << "Error: Índice o valor incorrecto." << "\n";
   }
@@ -53,12 +64,9 @@ void GestorInferencia::SeleccionarInteres(int indice_variable) {
  * @return true Si la configuración es válida, false si hay conflictos
  */
 void GestorInferencia::MostrarConfiguracion() {
-  std::cout << "Variables Condicionadas:\n";
+  std::cout << "Valores de las Variables Condicionadas:\n";
   for(int i = 0; i < num_variables_; ++i) {
-    if(valores_condicionados_[i] != -1) {
-      std::cout << "  Variable X" << (i+1) << " = " 
-                << valores_condicionados_[i] << "\n";
-    }
+    std::cout << "  Variable X" << (i+1) << " = " << valores_condicionados_[i] << "\n";
   }
   std::cout << "Variables de Interes\n";
   for(int i = 0; i < num_variables_; ++i) {
