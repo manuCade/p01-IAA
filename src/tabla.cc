@@ -1,10 +1,27 @@
-#include "tabla.h"
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Inteligencia Artificial Avanzada
+ * Curso: 3º
+ * Práctica 1: Inferencia Condicional en Distribuciones Discretas Binarias
+ * Autores: Manuel Cadenas García alu0101636849@ull.edu.es
+ *          Saúl Lorenzo Armas alu0101642468@ull.edu.es
+ * Fecha: 05/02/2026
+ */
 
+#include <cmath>
 #include <random>
 #include <fstream>
 #include <sstream>
-#include <iostream>
+#include "tabla.h"
 
+/**
+ * @brief Constructor que inicializa la tabla de probabilidades generando 
+ *        números aleatorios
+ * 
+ * @param numero_variables El número de variables binarias
+ */
 Tabla::Tabla(int numero_variables) {
   std::vector<double> tabla{};
   tabla.resize(std::pow(2, numero_variables));
@@ -25,6 +42,13 @@ Tabla::Tabla(int numero_variables) {
   }
 }
 
+/**
+ * @brief Método privado que convierte una cadena de bits (por ejemplo, "101") 
+ *        en un índice numérico correspondiente
+ * 
+ * @param input La cadena de bits representando la combinación de variables
+ * @return El índice numérico correspondiente a la combinación de bits
+ */
 size_t Tabla::ConvertirAIndice(const std::string& input) {
   size_t indice{0};
   for (size_t i = 0; i < input.length(); ++i) {
@@ -33,6 +57,12 @@ size_t Tabla::ConvertirAIndice(const std::string& input) {
   return indice;
 }
 
+/**
+ * @brief Constructor que inicializa la tabla de probabilidades leyendo los 
+ *        valores desde un archivo CSV
+ * 
+ * @param nombre_archivo_csv El nombre del archivo CSV
+ */
 Tabla::Tabla(const std::string& nombre_archivo_csv) {
   std::ifstream archivo_csv(nombre_archivo_csv);
   std::string linea{};

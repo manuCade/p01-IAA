@@ -1,12 +1,12 @@
-# University of La Laguna
-# School of Engineering and Technology
-# Bachelor's Degree in Computer Engineering
-# Course: Design and Analysis of Algorithms
-# Year: 3rd
-# Practice 1: Complexity analysis
-# Author: Manuel Cadenas García
-# Email: alu0101636849@ull.edu.es
-# Date: 05/02/2026
+# Universidad de La Laguna
+# Escuela Superior de Ingeniería y Tecnología
+# Grado en Ingeniería Informática
+# Asignatura: Inteligencia Artificial Avanzada
+# Curso: 3º
+# Práctica 1: Inferencia Condicional en Distribuciones Discretas Binarias
+# Autores: Manuel Cadenas García alu0101636849@ull.edu.es
+#          Saúl Lorenzo Armas alu0101642468@ull.edu.es
+# Fecha: 05/02/2026
 
 # Compiler configuration
 CXX = g++
@@ -18,7 +18,7 @@ DEBUG_FLAGS       = -g -Wall -Wextra -Wpedantic
 RELEASE_FLAGS     = -O3
 
 # Default build mode
-BUILD ?= release
+BUILD ?= debug
 
 ifeq ($(BUILD),debug)
   CXXFLAGS = $(STD) $(DEBUG_FLAGS)
