@@ -22,6 +22,7 @@
  */
 class Tabla {
  public:
+  Tabla() = default;
   Tabla(int numero_variables);
   Tabla(const std::string& nombre_archivo_csv);
  private:
