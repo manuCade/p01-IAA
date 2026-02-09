@@ -75,4 +75,7 @@ int main() {
   }
 
   gestor.MostrarConfiguracion();
+  std::cout << "Máscara de variables de interés: " << gestor.getMascaraInteres() << "\n";
+  std::cout << "Máscara de índices condicionados: " << gestor.getMascaraCondicionalIndices() << "\n";
+  std::cout << "Máscara de valores condicionados: " << gestor.getMascaraCondicionalValores() << "\n";
 }

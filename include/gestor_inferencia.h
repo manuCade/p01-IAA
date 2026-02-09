@@ -15,6 +15,9 @@ class GestorInferencia {
   void IndicesCondicionada(int indice_variable);
   void SeleccionarInteres(int indice_variable);
   void MostrarConfiguracion();
+  int getMascaraInteres();
+  int getMascaraCondicionalIndices();
+  int getMascaraCondicionalValores();
 
  private:
   int num_variables_{0};
