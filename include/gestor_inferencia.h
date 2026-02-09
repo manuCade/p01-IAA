@@ -15,9 +15,9 @@ class GestorInferencia {
   void IndicesCondicionada(int indice_variable);
   void SeleccionarInteres(int indice_variable);
   void MostrarConfiguracion();
-  int getMascaraInteres();
-  int getMascaraCondicionalIndices();
-  int getMascaraCondicionalValores();
+  std::vector<bool> getIndicesCondicionados() const { return indices_condicionados_; }
+  std::vector<bool> getValoresCondicionados() const { return valores_condicionados_; }
+  std::vector<bool> getEsInteres() const { return es_interes_; }
 
  private:
   int num_variables_{0};

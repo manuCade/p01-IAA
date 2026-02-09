@@ -14,6 +14,7 @@
 #include <string>
 #include "distribucion_conjunta.h"
 #include "gestor_inferencia.h"
+#include "probabilidad.h"
 
 int main() {
   std::cout << "Quiere generar la tabla a partir de un fichero csv? (s/n): ";
@@ -74,8 +75,9 @@ int main() {
     gestor.SeleccionarInteres(indice);
   }
 
+  std::cout << "\nConfiguración actual:\n";
   gestor.MostrarConfiguracion();
-  std::cout << "Máscara de variables de interés: " << gestor.getMascaraInteres() << "\n";
-  std::cout << "Máscara de índices condicionados: " << gestor.getMascaraCondicionalIndices() << "\n";
-  std::cout << "Máscara de valores condicionados: " << gestor.getMascaraCondicionalValores() << "\n";
+  Probabilidad prob(tabla.GetDistribucionConjunta(), tabla.GetNumeroVariables(), gestor.getEsInteres(), gestor.getIndicesCondicionados(), gestor.getValoresCondicionados());
+  std::vector<double> resultado = prob.CalcularProbabilidadCondicional();
+  prob.MostrarTablaPequeña(resultado);
 }

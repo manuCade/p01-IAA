@@ -27,6 +27,7 @@ class DistribucionConjunta {
   DistribucionConjunta(const std::string& nombre_archivo_csv);
   size_t GetNumeroVariables() const { return num_variables_; }
   void Mostrar() const;
+  std::vector<double> GetDistribucionConjunta() const { return distribucion_conjunta_; }
  private:
   std::vector<double> distribucion_conjunta_;
   int num_variables_{0};

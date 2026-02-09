@@ -57,36 +57,6 @@ void GestorInferencia::SeleccionarInteres(int indice_variable) {
   }
 }
 
-int GestorInferencia::getMascaraInteres() {
-  int mascara = 0;
-  for (int i = 0; i < num_variables_; ++i) {
-    if (es_interes_[i]) {
-      mascara |= (1 << i);
-    }
-  }
-  return mascara;
-}
-
-int GestorInferencia::getMascaraCondicionalIndices() {
-  int mascara = 0;
-  for (int i = 0; i < num_variables_; ++i) {
-    if (indices_condicionados_[i]) {
-      mascara |= (1 << i);
-    }
-  }
-  return mascara;
-} 
-
-int GestorInferencia::getMascaraCondicionalValores() {
-  int mascara = 0;
-  for (int i = 0; i < num_variables_; ++i) {
-    if (valores_condicionados_[i] && indices_condicionados_[i]) {
-      mascara |= (1 << i);
-    }
-  }
-  return mascara;
-}
-
 /**
  * @brief Método para imprimir la configuración actual de variables 
  *        condicionadas e interés
