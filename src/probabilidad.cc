@@ -88,7 +88,9 @@ for (size_t i = 0; i < tabla_pequeña.size(); ++i) {
  */
 void Probabilidad::MostrarDistribucionCondicional() {
   const std::vector<double> tabla_pequeña = CalcularProbabilidadCondicional();
+
   const int ancho = static_cast<int>(std::log10(num_variables_)) + 3;
+
   for (int j = num_variables_ - 1; j >= 0; --j) {
     if (mascara_interes_[j]) {
       std::cout << std::setw(ancho) << ("X" + std::to_string(j + 1));

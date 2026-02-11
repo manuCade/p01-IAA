@@ -102,8 +102,7 @@ void DistribucionConjunta::Mostrar() const {
 
   for (size_t i = 0; i < distribucion_conjunta_.size(); ++i) {
     for (int j = num_variables_ - 1; j >= 0; --j) {
-      std::cout << std::setw(ancho)
-                << ((i & (1 << j)) ? "1" : "0");
+      std::cout << std::setw(ancho) << ((i & (1 << j)) ? "1" : "0");
     }
     std::cout << " : " << distribucion_conjunta_[i] << "\n";
   }

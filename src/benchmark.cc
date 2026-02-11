@@ -16,11 +16,12 @@ void Benchmark::EjecutarYGuardar(const std::string& nombre_archivo) {
   std::cout << "[Benchmark] Guardando resultados exhaustivos en: " << nombre_archivo 
             << "...\n";
   archivo << "n_variables,k_interes,k_condicionales,tiempo_ms\n";
+  archivo.close();
   
   for (int k_int = 1; k_int <= n_variables_; ++k_int) {
-    int max_condicionales = n_variables_ - k_int;
-    
+    int max_condicionales = n_variables_ - k_int; 
     for (int k_cond = 1; k_cond <= max_condicionales; ++k_cond) {
+      archivo.open(nombre_archivo, std::ios::app);
       std::vector<bool> mascara_interes(n_variables_, false);
       std::vector<bool> mascara_condicionales(n_variables_, false);
       std::vector<bool> mascara_valores_condicionales(n_variables_, false);
@@ -35,13 +36,11 @@ void Benchmark::EjecutarYGuardar(const std::string& nombre_archivo) {
 
       double tiempo = MedirUnaEjecucion(mascara_interes, mascara_condicionales, mascara_valores_condicionales);
 
-      // Quitar el 100 para el programa de verdad
-      int tiempo_redondeado = static_cast<int>(std::round(tiempo * 100));
-
-      archivo << n_variables_ << "," << k_int << "," << k_cond << "," << tiempo_redondeado << "\n";
+      archivo << n_variables_ << "," << k_int << "," << k_cond << "," << tiempo << "\n";
+      archivo.close();
     }
   }
-  archivo.close();
+  
   std::cout << "[Benchmark] Finalizado.\n";
 }
 
