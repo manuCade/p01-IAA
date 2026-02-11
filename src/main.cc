@@ -16,7 +16,24 @@
 #include "gestor_inferencia.h"
 #include "probabilidad.h"
 
+#include "benchmark.h"
+
 int main() {
+  std::cout << "¿Quiere ejecutar el benchmark o la aplicación interactiva? (b/a): ";
+  char modo{};
+  std::cin >> modo;
+  if (modo == 'b' || modo == 'B') {
+    // const int n_variables = 20;
+    // Benchmark benchmark(n_variables);
+    // benchmark.EjecutarYGuardar("csv/results.csv");
+    // return EXIT_SUCCESS;
+    for (int n = 10; n <= 20; ++n) {
+      Benchmark benchmark(n);
+      std::string nombre_archivo = "csv/results_" + std::to_string(n) + "_variables.csv";
+      benchmark.EjecutarYGuardar(nombre_archivo);
+    }
+    return EXIT_SUCCESS;
+  }
   std::cout << "Quiere generar la tabla a partir de un fichero csv? (s/n): ";
   char respuesta{};
   std::cin >> respuesta;
@@ -80,4 +97,8 @@ int main() {
   Probabilidad prob(tabla.GetDistribucionConjunta(), tabla.GetNumeroVariables(), gestor.getEsInteres(), gestor.getIndicesCondicionados(), gestor.getValoresCondicionados());
   std::vector<double> resultado = prob.CalcularProbabilidadCondicional();
   prob.MostrarTablaPequeña(resultado);
+  std::cout << "\nDistribución condicional formateada:\n";
+  prob.MostrarDistribucionCondicional();
+
+  return EXIT_SUCCESS;
 }

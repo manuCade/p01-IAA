@@ -1,6 +1,7 @@
 #include "probabilidad.h"
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 
 Probabilidad::Probabilidad(std::vector<double> distribucion_conjunta, int num_variables, std::vector<bool> mascara_interes, std::vector<bool> mascara_condicional_indices, std::vector<bool> mascara_condicional_valores) {
   distribucion_conjunta_ = distribucion_conjunta;
@@ -77,5 +78,31 @@ std::vector<double> Probabilidad::CalcularProbabilidadCondicional() {
 void Probabilidad::MostrarTablaPequeña(std::vector<double> tabla_pequeña) {
 for (size_t i = 0; i < tabla_pequeña.size(); ++i) {
     std::cout << tabla_pequeña[i] << "\n";
+  }
+}
+
+/**
+ * @brief Muestra la distribución condicional formateada alineando
+ * las variables de interés con sus bits correspondientes.
+ * * @param tabla_pequeña El vector con las probabilidades ya calculadas y normalizadas.
+ */
+void Probabilidad::MostrarDistribucionCondicional() {
+  const std::vector<double> tabla_pequeña = CalcularProbabilidadCondicional();
+  const int ancho = static_cast<int>(std::log10(num_variables_)) + 3;
+  for (int j = num_variables_ - 1; j >= 0; --j) {
+    if (mascara_interes_[j]) {
+      std::cout << std::setw(ancho) << ("X" + std::to_string(j + 1));
+    }
+  }
+  std::cout << " : Probabilidad\n";
+
+  int num_vars_interes = 0;
+  for(bool v : mascara_interes_) if(v) num_vars_interes++;
+  
+  for (size_t i = 0; i < tabla_pequeña.size(); ++i) {
+    for (int bit = num_vars_interes - 1; bit >= 0; --bit) {
+      std::cout << std::setw(ancho) << ((i & (1 << bit)) ? "1" : "0");
+    std::cout << " : " << std::fixed << std::setprecision(4) << tabla_pequeña[i] << "\n";
+    }
   }
 }

@@ -15,6 +15,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <iomanip>
 #include "distribucion_conjunta.h"
 
 /**
@@ -92,7 +93,18 @@ DistribucionConjunta::DistribucionConjunta(const std::string& nombre_archivo_csv
  * @brief Método para mostrar la tabla de probabilidades en la consola
  */
 void DistribucionConjunta::Mostrar() const {
-  for(size_t i = 0; i < distribucion_conjunta_.size(); ++i) {
-    std::cout << "Indice " << i << ": " << distribucion_conjunta_[i] << "\n";
+  const int ancho = static_cast<int>(std::log10(num_variables_)) + 3;
+
+  for (int j = num_variables_; j >= 1; --j) {
+    std::cout << std::setw(ancho) << ("X" + std::to_string(j));
+  }
+  std::cout << "\n";
+
+  for (size_t i = 0; i < distribucion_conjunta_.size(); ++i) {
+    for (int j = num_variables_ - 1; j >= 0; --j) {
+      std::cout << std::setw(ancho)
+                << ((i & (1 << j)) ? "1" : "0");
+    }
+    std::cout << " : " << distribucion_conjunta_[i] << "\n";
   }
 }
