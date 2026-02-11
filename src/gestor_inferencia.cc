@@ -78,9 +78,11 @@ void GestorInferencia::SeleccionarInteres(int indice_variable) {
 void GestorInferencia::MostrarConfiguracion() {
   std::cout << "Valores de las Variables Condicionadas:\n";
   for(int i = 0; i < num_variables_; ++i) {
-    std::cout << "  Variable X" << (i+1) << " = " << valores_condicionados_[i] << "\n";
+    if(indices_condicionados_[i]) {
+      std::cout << "  Variable X" << (i+1) << " = " << valores_condicionados_[i] << "\n";
+    }
   }
-  std::cout << "Variables de Interes\n";
+  std::cout << "\nVariables de Interés\n";
   for(int i = 0; i < num_variables_; ++i) {
     if(es_interes_[i]) {
       std::cout << "  Variable X" << (i+1) << "\n";
