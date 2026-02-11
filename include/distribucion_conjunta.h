@@ -16,9 +16,8 @@
 #include <string>
 
 /**
- * @class Clase que representa una tabla de probabilidades para una distribución
- * conjunta de variables binarias. La tabla se puede inicializar de dos formas: 
- * generando números aleatorios o leyendo los valores desde un archivo CSV.
+ * @class DistribucionConjunta
+ * @brief Clase que representa una distribución conjunta de variables binarias.
  */
 class DistribucionConjunta {
  public:

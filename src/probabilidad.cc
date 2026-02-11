@@ -1,8 +1,26 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Inteligencia Artificial Avanzada
+ * Curso: 3º
+ * Práctica 1: Inferencia Condicional en Distribuciones Discretas Binarias
+ * Autores: Manuel Cadenas García alu0101636849@ull.edu.es
+ *          Saúl Lorenzo Armas alu0101642468@ull.edu.es
+ * Fecha: 09/02/2026
+ */
+
 #include "probabilidad.h"
 #include <cmath>
 #include <iostream>
 #include <iomanip>
 
+/**
+ * Constructor de la clase Probabilidad.
+ * 
+ * @param distribucion_conjunta Vector que representa la distribución conjunta de las variables.
+ * @param num_variables Número total de variables en la distribución conjunta.
+ */
 Probabilidad::Probabilidad(std::vector<double> distribucion_conjunta, int num_variables, std::vector<bool> mascara_interes, std::vector<bool> mascara_condicional_indices, std::vector<bool> mascara_condicional_valores) {
   distribucion_conjunta_ = distribucion_conjunta;
   num_variables_ = num_variables;
@@ -11,7 +29,12 @@ Probabilidad::Probabilidad(std::vector<double> distribucion_conjunta, int num_va
   mascara_condicional_valores_ = mascara_condicional_valores;
 }
 
-
+/**
+ * Convierte un índice entero a su representación binaria en forma de vector de booleanos.
+ * 
+ * @param index El índice entero a convertir.
+ * @param num_bits El número de bits que debe tener la representación binaria.
+ */
 std::vector<bool> indexToBinary(int index, int num_bits) {
   std::vector<bool> binary(num_bits, 0);
   for (int i = 0; i < num_bits; ++i) {
@@ -21,6 +44,11 @@ std::vector<bool> indexToBinary(int index, int num_bits) {
   return binary;
 }
 
+/**
+ * Calcula la distribución condicional basada en la distribución conjunta y las máscaras de interés y condicionales.
+ * 
+ * @return Un vector que representa la distribución condicional normalizada.
+ */
 std::vector<double> Probabilidad::CalcularProbabilidadCondicional() {
   //Contar cuántas variables de interés hay 
   int count = 0;

@@ -4,9 +4,9 @@
 #include "distribucion_conjunta.h"
 
 /**
- * @class Clase que gestiona la inferencia condicional en una distribución 
- * conjunta de variables binarias. Permite seleccionar variables como 
- * condicionadas o de interés, y mostrar la configuración actual.
+ * @class GestorInferencia
+ * @brief Clase que gestiona la configuración de la inferencia condicional, 
+ *        incluyendo las variables de interés y las variables condicionadas, así como sus valores.
  */
 class GestorInferencia {
  public:

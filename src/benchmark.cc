@@ -1,3 +1,15 @@
+/**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Inteligencia Artificial Avanzada
+ * Curso: 3º
+ * Práctica 1: Inferencia Condicional en Distribuciones Discretas Binarias
+ * Autores: Manuel Cadenas García alu0101636849@ull.edu.es
+ *          Saúl Lorenzo Armas alu0101642468@ull.edu.es
+ * Fecha: 09/02/2026
+ */
+
 #include "benchmark.h"
 #include "probabilidad.h"
 #include <iostream>
@@ -6,11 +18,23 @@
 #include <iomanip>
 #include <cmath>
 
+/**
+ * @brief Constructor de la clase Benchmark.
+ * 
+ * @param num_variables Número de variables en la distribución conjunta.
+ */
 Benchmark::Benchmark(int num_variables) : n_variables_(num_variables), distribucion_(num_variables) {
   std::cout << "[Benchmark] Inicializando distribucion con N=" 
             << n_variables_ << "...\n";
 }
 
+
+/**
+ * @brief Ejecuta el benchmark para todas las combinaciones de variables de interés y condicionales,
+ * midiendo el tiempo de ejecución y guardando los resultados en un archivo CSV.
+ * 
+ * @param nombre_archivo Nombre del archivo donde se guardarán los resultados.
+ */
 void Benchmark::EjecutarYGuardar(const std::string& nombre_archivo) {
   std::ofstream archivo(nombre_archivo);
   std::cout << "[Benchmark] Guardando resultados exhaustivos en: " << nombre_archivo 
@@ -44,6 +68,15 @@ void Benchmark::EjecutarYGuardar(const std::string& nombre_archivo) {
   std::cout << "[Benchmark] Finalizado.\n";
 }
 
+
+/**
+ * @brief Mide el tiempo de ejecución de una sola configuración de variables de interés y condicionales.
+ * 
+ * @param mascara_interes Vector booleano que indica qué variables son de interés.
+ * @param mascara_condicionales Vector booleano que indica qué variables son condicionadas.
+ * @param mascara_valores_condicionales Vector booleano que indica los valores de las variables condicionadas.
+ * @return El tiempo de ejecución en milisegundos.
+ */
 double Benchmark::MedirUnaEjecucion(const std::vector<bool>& mascara_interes, 
                                     const std::vector<bool>& mascara_condicionales, 
                                     const std::vector<bool>& mascara_valores_condicionales) {
