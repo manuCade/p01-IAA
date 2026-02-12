@@ -24,7 +24,7 @@ int main() {
   std::cin >> modo;
 
   if (modo == 'b' || modo == 'B') {
-    for (int n = 25; n <= 25; n += 5) {
+    for (int n = 1; n <= 10; n++) {
       Benchmark benchmark(n);
       std::string nombre_archivo = "csv/results_" + std::to_string(n) + "_variables.csv";
       benchmark.EjecutarYGuardar(nombre_archivo);
