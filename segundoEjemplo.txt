@@ -1,0 +1,31 @@
+¿Quiere ejecutar el benchmark o la aplicación interactiva? (b/a): Quiere generar la tabla a partir de un fichero csv? (s/n): Introduzca el nombre del fichero csv:  X4 X3 X2 X1
+  0  0  0  0 : 0.06
+  0  0  0  1 : 0.08
+  0  0  1  0 : 0.05
+  0  0  1  1 : 0.07
+  0  1  0  0 : 0.09
+  0  1  0  1 : 0.04
+  0  1  1  0 : 0.03
+  0  1  1  1 : 0.01
+  1  0  0  0 : 0.1
+  1  0  0  1 : 0.02
+  1  0  1  0 : 0.06
+  1  0  1  1 : 0.08
+  1  1  0  0 : 0.05
+  1  1  0  1 : 0.07
+  1  1  1  0 : 0.09
+  1  1  1  1 : 0.1
+
+Cuántas variables quieres condicionar? Índice variable (1-4): Valor (0 o 1): 
+Cuántas variables de interés? Índice variable (1-4): 
+Configuración actual:
+Valores de las Variables Condicionadas:
+  Variable X1 = 0
+
+Variables de Interés
+  Variable X2
+
+Distribución condicional formateada:
+ X2 : Probabilidad
+  0 : 0.5660
+  1 : 0.4340
