@@ -1,4 +1,7 @@
-¿Quiere ejecutar el benchmark o la aplicación interactiva? (b/a): ¿Quiere ejecutar el benchmark o la aplicación interactiva? (b/a): Quiere generar la tabla a partir de un fichero csv? (s/n): Introduzca el número de variables binarias: ¿Quiere ejecutar el benchmark o la aplicación interactiva? (b/a): Quiere generar la tabla a partir de un fichero csv? (s/n): Introduzca el nombre del fichero csv:  X4 X3 X2 X1
+¿Quiere ejecutar el benchmark o la aplicación interactiva? (b/a): a
+Quiere generar la tabla a partir de un fichero csv? (s/n): s
+Introduzca el nombre del fichero csv: csv/modificacion.csv 
+ X4 X3 X2 X1
   0  0  0  0 : 0.06
   0  0  0  1 : 0.08
   0  0  1  0 : 0.05
@@ -16,9 +19,10 @@
   1  1  1  0 : 0.09
   1  1  1  1 : 0.1
 
-Cuántas variables quieres condicionar? 
-Cuántas variables de interés? Índice variable (1-4): 
-Configuración actual:
+Cuántas variables quieres condicionar? 0
+Cuántas variables de interés? 1 
+Índice variable (1-4): 1
+Configuración actual: 
 Valores de las Variables Condicionadas:
 
 Variables de Interés
